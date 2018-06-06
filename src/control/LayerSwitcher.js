@@ -669,13 +669,8 @@ ol_control_LayerSwitcher.prototype.drawList = function(ul, collection)
                     drag.layer = drag.elt.closest("li").data('layer')
 
                     var arr = layer.getSource();
-                    //arr.forEach(function (feature) {
                     mapSection.setSizes([50, 50]);
-                    dataTables(drag.layer.getSource())
-
-                    //})
-                    console.log(drag.layer)
-
+                    dataTables(drag.layer.getSource());
                 } ));
 		else if (layer instanceof ol_layer_VectorTile) li.addClass('ol-layer-vector');
 		else if (layer instanceof ol_layer_Tile) li.addClass('ol-layer-tile');

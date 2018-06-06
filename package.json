@@ -1,5 +1,5 @@
 {
-  "name": "ol-ext-datatables",
+  "name": "ol-ext-datatable",
   "version": "1.1.0",
   "description": "Datatables version",
   "main": "index.js",
@@ -32,7 +32,7 @@
     "name": "Ozcan Durak <info@ozcandurak.com>",
     "url": "https://github.com/ozcan-durak"
   },
-  "homepage": "https://github.com/ozcan-durak#,",
+  "homepage": "https://github.com/ozcan-durak/ol-ext-datatables#,",
   "keywords": [
     "ol3",
     "openlayers",
@@ -53,7 +53,7 @@
   ],
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/ozcan-durak"
+    "url": "git+https://github.com/ozcan-durak/ol-ext-datatables"
   },
   "license": "BSD-3-Clause"
 }
