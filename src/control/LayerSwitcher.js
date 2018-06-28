@@ -493,6 +493,14 @@ ol_control_LayerSwitcher.prototype.drawList = function(ul, collection)
 		var l = $(this).parent().parent().data("layer");
 		self.switchLayerVisibility(l,collection);
 	};
+    var openTables = function(e)
+    {	e.stopPropagation();
+        e.preventDefault();
+        var l = $(this).parent().parent().data("layer");
+        mapSection.setSizes([50, 50]);
+        map.updateSize()
+        dataTables(l.getSource())
+    };
 	function moveLayer (l, layers, inc)
 	{	
 		for (var i=0; i<layers.getLength(); i++)
@@ -551,7 +559,12 @@ ol_control_LayerSwitcher.prototype.drawList = function(ul, collection)
 
 		var d = $("<div>").addClass('li-content').appendTo(li);
 		if (!this.testLayerVisibility(layer)) d.addClass("ol-layer-hidden");
-		
+        // Datatables
+        $("<img>")
+            .attr('src', 'https://image.flaticon.com/icons/svg/25/25617.svg')
+            .attr('style', 'height: 20px; margin-right: 10px; margin-bottom: 19px;')
+            .on ('click', openTables)
+            .appendTo(d);
 		// Visibility
 		$("<input>")
 			.attr('type', layer.get('baseLayer') ? 'radio' : 'checkbox')
@@ -659,20 +672,8 @@ ol_control_LayerSwitcher.prototype.drawList = function(ul, collection)
 			{	this.drawList ($("<ul>").appendTo(li), layer.getLayers());
 			}
 		}
-        else if (layer instanceof ol_layer_Vector)
-            (li.addClass('ol-layer-vector'),
-                $(li).prepend('<img class="theImg" src="https://image.flaticon.com/icons/svg/25/25617.svg" style="height: 20px; margin-right: 10px; margin-bottom: 19px;"/>').on("mousedown touchstart",{ self: this }, function(e)
-                {	var drag = e.data;
-                    e.stopPropagation();
-                    e.preventDefault();
-                    drag.elt = $(e.target);
-                    drag.layer = drag.elt.closest("li").data('layer')
-
-                    var arr = layer.getSource();
-                    mapSection.setSizes([50, 50]);
-                    dataTables(drag.layer.getSource());
-                } ));
-		else if (layer instanceof ol_layer_VectorTile) li.addClass('ol-layer-vector');
+        else if (layer instanceof ol_layer_Vector) li.addClass('ol-layer-vector');
+        else if (layer instanceof ol_layer_VectorTile) li.addClass('ol-layer-vector');
 		else if (layer instanceof ol_layer_Tile) li.addClass('ol-layer-tile');
 		else if (layer instanceof ol_layer_Image) li.addClass('ol-layer-image');
 		else if (layer instanceof ol_layer_Heatmap) li.addClass('ol-layer-heatmap');
