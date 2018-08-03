@@ -561,6 +561,9 @@ ol_control_LayerSwitcher.prototype.drawList = function(ul, collection)
 
 		var d = $("<div>").addClass('li-content').appendTo(li);
 		if (!this.testLayerVisibility(layer)) d.addClass("ol-layer-hidden");
+        if(layer.get('baseLayer')){
+            return
+        }
         // Datatables
         $("<img>")
             .attr('src', 'https://image.flaticon.com/icons/svg/25/25617.svg')
