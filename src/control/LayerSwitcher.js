@@ -263,8 +263,10 @@ ol_control_LayerSwitcher.prototype.drawPanel_ = function(e)
  */
 ol_control_LayerSwitcher.prototype.switchLayerVisibility = function(l, layers)
 {
-	if (!l.get('baseLayer')) l.setVisible(!l.getVisible());
-	else 
+    if (!l.get('baseLayer')){
+        l.setVisible(!l.getVisible());
+        window["pano"+l.values_.name].visible = l.getVisible();
+    }	else
 	{	if (!l.getVisible()) l.setVisible(true);
 		layers.forEach(function(li)
 		{	if (l!==li && li.get('baseLayer') && li.getVisible()) li.setVisible(false);
